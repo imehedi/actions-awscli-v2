@@ -6,7 +6,7 @@ jobs:
     name: list s3 buckets
     steps:
       - name: AWS CLI v2
-        uses: imehedi/actions-awscliv2@v1
+        uses: imehedi/actions-awscliv2@v1.0.1
         with:
           args: s3 ls
         env:
