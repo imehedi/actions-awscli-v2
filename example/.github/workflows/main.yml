@@ -1,0 +1,15 @@
+on: [push]
+
+jobs:
+  s3_listling:
+    runs-on: ubuntu-latest
+    name: list s3 buckets
+    steps:
+      - name: AWS CLI v2
+        uses: imehedi/actions-awscliv2@v1
+        with:
+          args: s3 ls
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-west-1"

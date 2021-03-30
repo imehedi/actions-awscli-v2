@@ -1,0 +1,10 @@
+name: 'AWS CLI v2'
+description: 'A simple GitHub action using official AWS Image which allows
+running all commands that starts with "aws ...". '
+author: imehedi
+branding:
+  icon: 'cloud'
+  color: 'orange'
+runs:
+  using: docker
+  image: Dockerfile
