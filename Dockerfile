@@ -1,1 +1,1 @@
-FROM amazon/aws-cli:2.0.6
+FROM amazon/aws-cli:2.1.32
