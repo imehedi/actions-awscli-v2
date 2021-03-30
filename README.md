@@ -33,3 +33,7 @@ which we can do as below:
       AWS_DEFAULT_REGION: "eu-west-1"
 ```
 
+###Materials for curious minds
+
+* [AWS CLI V2 Changelog](https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst)
+* [How add secrets to repo?](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
