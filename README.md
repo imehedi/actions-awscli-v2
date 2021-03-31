@@ -1,3 +1,5 @@
+[![GitHub Actions release flow](https://github.com/imehedi/actions-awscli-v2/actions/workflows/release-flow.yml/badge.svg)](https://github.com/imehedi/actions-awscli-v2/actions/workflows/release-flow.yml)
+
 # Action - AWS CLI V2
 
 This action provides capability to run any of the AWS CLI commands using 
