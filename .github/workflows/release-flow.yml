@@ -38,15 +38,6 @@ jobs:
           release_name: ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
 
-      - name: update latest release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: latest
-          release_name: latest
-          body: ${{ steps.tag_version.outputs.changelog }}
-
       - uses: dev-drprasad/delete-older-releases@v0.1.0
         with:
           keep_latest: 3
