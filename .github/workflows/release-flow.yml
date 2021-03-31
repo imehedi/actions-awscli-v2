@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: GitHub Actions release flow
 
 on:
   push:
@@ -26,6 +26,8 @@ jobs:
 
       - name: test the new action
         uses: imehedi/actions-awscli-v2@latest
+        with:
+          args: --version
 
       - name: update release
         uses: actions/create-release@v1
