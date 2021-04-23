@@ -7,7 +7,7 @@ version 2 of the CLI tool.
 
 ```yaml
 - name: AWS CLI v2
-  uses: imehedi/actions-awscliv2@v1.0.1
+  uses: imehedi/actions-awscli-v2@latest
   with:
     args: s3 ls
 ```
@@ -26,7 +26,7 @@ which we can do as below:
 
 ```yaml
 - name: AWS CLI v2
-  uses: imehedi/actions-awscliv2@v1.0.1
+  uses: imehedi/actions-awscli-v2@latest
   with:
       args: s3 ls
   env:
