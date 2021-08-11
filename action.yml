@@ -7,4 +7,4 @@ branding:
   color: 'orange'
 runs:
   using: docker
-  image: docker://amazon/aws-cli:2.1.32
+  image: docker://amazon/aws-cli:2.2.28
