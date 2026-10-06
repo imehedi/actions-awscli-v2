@@ -5,40 +5,57 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-flow-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
 
-  build:
-
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
+
+      # Test the action from this commit, before anything is tagged or released.
+      - name: test the action from this commit
+        uses: ./
+        with:
+          args: --version
+
+  release:
+    needs: test
+    # Tag and release only from main; pull requests are tested, never released.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v7
 
       - name: Bump version and push tag
         id: tag_version
-        uses: mathieudutour/github-tag-action@v5.3
+        uses: mathieudutour/github-tag-action@v7
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: mark latest commit as latest
-        uses: EndBug/latest-tag@latest
+        uses: EndBug/latest-tag@v1
 
-      - name: test the new action
-        uses: imehedi/actions-awscli-v2@latest
-        with:
-          args: --version
-
-      - name: update release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: create release
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
-          release_name: ${{ steps.tag_version.outputs.new_tag }}
+          name: ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
 
-      - uses: dev-drprasad/delete-older-releases@v0.1.0
+      - uses: dev-drprasad/delete-older-releases@v0.3.4
         with:
           keep_latest: 3
         env:

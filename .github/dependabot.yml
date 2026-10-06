@@ -1,0 +1,8 @@
+version: 2
+updates:
+  # Keeps the workflow's action versions current.
+  # The AWS CLI image in action.yml is not covered by Dependabot; bump it by hand.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

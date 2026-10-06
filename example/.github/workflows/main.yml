@@ -1,15 +1,21 @@
-on: [push]
+on: [ push ]
+
+permissions:
+  id-token: write   # required to request the OIDC token
+  contents: read
 
 jobs:
-  s3_listling:
+  s3_listing:
     runs-on: ubuntu-latest
     name: list s3 buckets
     steps:
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/github-actions-role
+          aws-region: eu-west-1
+
       - name: AWS CLI v2
-        uses: imehedi/actions-awscliv2@v1.0.1
+        uses: imehedi/actions-awscli-v2@latest
         with:
           args: s3 ls
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: "eu-west-1"
